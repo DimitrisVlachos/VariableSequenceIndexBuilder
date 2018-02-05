@@ -7,17 +7,14 @@ https://github.com/DimitrisVlachos?tab=repositories
 #ifndef __index_builder_hpp__
 #define __index_builder_hpp__
 #include <stdint.h>
-#include <unordered_map>
 #include <map>
+
+
 template <class obj_t,typename index_t>
 class index_builder_if {
-    
 private:
-    
 public:
-    
     virtual ~index_builder_if() {}
-    
     virtual void cleanup() {}
     virtual bool add(obj_t& str) { return false; }
     virtual bool get_index(obj_t& str,index_t& result) { return false; }
