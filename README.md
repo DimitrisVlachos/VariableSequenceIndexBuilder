@@ -19,13 +19,9 @@ Variable sequence index builder (WIP : BIG DATA support)
     std::cout << "Generate:" << std::endl;
     
     for(auto i = 0;i < data.size();++i) {
-    
         std::cout << "Adding " << data[i] << std::endl;
-        
         builder->get_index(data[i],index);
-        
         std::cout << "Index: " << index << std::endl;
-        
     }
     
     //Validate
