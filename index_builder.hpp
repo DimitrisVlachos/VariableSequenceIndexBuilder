@@ -7,10 +7,8 @@ https://github.com/DimitrisVlachos?tab=repositories
 #ifndef __index_builder_hpp__
 #define __index_builder_hpp__
 #include <stdint.h>
-#include <cassert>
-#include <array>
+#include <unordered_map>
 #include <map>
-#include <iostream>
 template <class obj_t,typename index_t>
 class index_builder_if {
     
@@ -40,21 +38,21 @@ private:
     struct cmp_obj {
          inline bool operator()(  obj_t* a,  obj_t* b)const {
             if (a->length() < b->length())
-                return false;
-            else if(a->length() > b->length()) 
                 return true;
-            
+            else if(a->length() > b->length()) 
+                return false;
             for (std::size_t i = 0, l = a->length();i < l;++i) {
-                if (a->at(i)== b->at(i))
+                auto x = a->at(i);
+                auto y = b->at(i);
+                if (x==y)
                     continue;
-                
-                return a->at(i) < b->at(i);
+                return (bool)(x < y);
             }
             return false;
         }
     };
     std::map<obj_t*,index_t,cmp_obj > m_indexes;
-    std::unordered_map<index_t,obj_t*> m_obj;
+    std::map<index_t,obj_t*> m_obj;
     index_t m_index;
    
      const std::string m_header = "ibuilder_basic";
